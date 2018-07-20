@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass{beamer}
 \usepackage{booktabs}
 \usepackage{lmodern}
 \usepackage{amsmath}
@@ -36,15 +36,7 @@
 %\usetheme{CambridgeUS}
 %\usetheme{Copenhagen}
 %\usetheme{Darmstadt}
-\usetheme{metropolis}
-\setbeamertemplate{itemize subitem}[triangle] % Pour le deuxième niveau
-\setbeamertemplate{itemize subsubitem}[square] % Pour le troisième niveau
-%\setbeamerfont*{itemize item}{size=\scriptsize}
-\setbeamercolor{itemize item}{}
-\setbeamercolor{itemize subitem}{fg=orange}
-\setbeamercolor{itemize subsubitem}{fg=orange}
-\setbeamerfont{headline}{size=\Large}
-%\usetheme{default}
+\usetheme{default}
 %\usetheme{Frankfurt}
 %\usetheme{Goettingen}
 %\usetheme{Hannover}
@@ -106,7 +98,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Outline}
+\begin{frame}{Outline}
   \tableofcontents
   % You might wish to add the option [pausesections]
 \end{frame}
@@ -143,7 +135,7 @@
   \item 
     Imputation
     \begin{itemize}
-    \item Conditional moments
+    \item conditional moments
       \( E (Y_1| Y_1 > y, Y_2=y, \, D=2) \)
     \item
       \( E (Y_1| Y_1 > y, Y_2 > y, \, D=0) \)
@@ -164,16 +156,16 @@ Simple example (for clarity)
 
 \begin{itemize}
 \item
-  \emph{Known} means of (log-)Normal latent vars, \emph{no censoring}
+  \emph{known} means of (log-)Normal latent vars, \emph{no censoring}
 \item
   \(y=\min(Y_1,Y_2)\) with \(Y \sim \text{BVN}(0, \Sigma)\), \(\Sigma\)
   unknown
 \item
   \(\Delta\) identifies which risk is observed (1 or 2)
 \item
-  Two risk times are never \emph{both} observed
+  two risk times are never \emph{both} observed
 \item
-  {\color{orange}{Goal}}: the ML estimator of \(\Sigma\) from a random sample of
+  Goal: the ML estimator of \(\Sigma\) from an random sample of
   \(y, \Delta\)
 \end{itemize}
 \end{frame}
@@ -204,105 +196,41 @@ Simple example (for clarity)
   \tightlist
   \item Bias and Variance in ML estimation of parameters (esp. \( \rho \) ) in BVN\( (\mu,\Sigma) \)
   \item Convergence status, number of iterations
-  \item Varying: sample size, tolerance (cvg)
+  \item varying: sample size, tolerance (cvg)
   \end{itemize}
 \end{itemize}
 \end{frame}
-% -----------------------------------------------------------------------
+
 
 \input{Methods.tex}
 
 \input{Results.tex}
 
-% -------------------------------------------------------------------------
-
-% \hypertarget{options}{%
-% \section{Options}\label{options}}
-
 \section{Consequences}
 
+\subsection{Fixed correlation, a la GEE}
 
-\begin{frame}[fragile]{Fixed correlation, a la GEE}
-\protect\hypertarget{fixed-correlation-a-la-gee}{}
-
-\begin{itemize}
-\tightlist
-\item
-  MPL solution with rho fixed
-\end{itemize}
-
-\begin{verbatim}
-- @AndersonOlkin1985 (R package **bnc**)
-\end{verbatim}
-
-\begin{block}{Fixed correlation, rationale}
-
-\begin{itemize}
-\tightlist
-\item
-  Estimating \(\rho\) is unstable \(\to\) fix its value a priori (to 0).
-\item
-  \(\rho=0\) is convenient
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Competing event \(\to\) (further) independent censoring
-  \item
-    Fit regreression coefficients of event 1 in
-    \texttt{survival::survreg}
-  \item
-    Generalized Estimating Equations (GEEs)
-
-    \begin{itemize}
-    \tightlist
-    \item
-      Consistency/ unbiasedness to estimating regression coefficients?
-    \item
-      Likelihood scores with assumed covariance structure
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
+\begin{frame}{Fixed correlation }
+\begin{block}{$\rho=0$}
+Since estimating $\rho$ is unstable, perhaps better to fix it (a priori to 0). 
 \end{block}
 
 \end{frame}
 
-% -------------------------------------------------------------------------
-\hypertarget{robustness-to-non-normality}{%
-\section{Robustness to non-Normality}\label{robustness-to-non-normality}}
+\begin{frame}{}
+    \includegraphics[width=1.00\textwidth]{Figure2/boxplotArray2.pdf} % [width=150pt]
+\end{frame}
 
 \subsection{Robustness to non-Normality}
 
-\begin{frame}{Frank copula}
-\protect\hypertarget{frank-copula}{}
-
+\begin{frame}{}
+\begin{exampleblock}{Frank's copula}
 \begin{itemize}
-\tightlist
-\item
-  We set standard Normal \emph{marginals}
-\item
-  Association parameter, Frank \(\theta\)
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \(\theta \rightarrow \tau \rightarrow \rho\)
-  \end{itemize}
-\item
-  \emph{Joint} distribution is \alert{non-} BVN
+    \item we set standard Normal marginals
+    \item association parameter, Franks $\theta$
 \end{itemize}
-
+\end{exampleblock}
 \end{frame}
-
-\begin{frame}[fragile]
-
-\begin{center}
-  \includegraphics[width=1.00\textwidth]{Figure2/boxplotArray2.pdf}
-\end{center}
-
-\end{frame}
-
-
 % Placing a * after \section means it will not show in the
 % outline or table of contents.
 \section*{Summary}
@@ -313,26 +241,26 @@ Simple example (for clarity)
 \begin{itemize}
 \tightlist
 \item<1->
-  Optimize to maximize Likelihood (\emph{routine})
+  optimize to maximize Likelihood (\emph{routine})
   \item<2-> EM algorithm (\emph{safety first}) 
-  \item<3-> Mildly
-Penalize Likelihood, adjust EM alg for MPL
-  \item<4-> Accelerate EM (Aitken via squareEM)
-  \item<5-> Change start-point: initial small number of
+  \item<3-> mildly
+penalize Likelihood, adjust EM alg for MPL
+  \item<4-> accelerate EM (Aitken via squareEM)
+  \item<5-> change start-point: initial small number of
 EM iterations 
   \item<6-> R-package \textbf{bnc}
 \end{itemize}
 
 \alert{\emph{What could possibly go wrong?}}
 \begin{itemize}
-\item<1> Singular Hessian, failure to remain in $-1 < \rho < 1$ 
+\item<1> singular Hessian, failure to remain in $-1 < \rho < 1$ 
 \item<2>
   \begin{enumerate}
-  \item[i.] Be prepared to wait (forever) for convergence;
-  \item[ii.] Convergence failure possible when $\hat{\rho} = +1$ or $-1$
+  \item[i.] be prepared to wait (forever) for convergence;
+  \item[ii.] convergence failure possible when $\hat{\rho} = +1$ or $-1$
   \end{enumerate}
-\item<3> Still very slow, but sure, convergence
-\item<4> Very fast, but can fail to converge
+\item<3> still very slow, but sure, convergence
+\item<4> very fast, but can fail to converge
 \end{itemize}
 \end{frame}
 
@@ -365,7 +293,7 @@ EM iterations
 
 % \hypertarget{references}{%
 
-\section*{References}\label{references}
+\section{References}\label{references}
 
 \begin{frame}[allowframebreaks]{References}
 \label{References}

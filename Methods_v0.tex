@@ -1,0 +1,56 @@
+\hypertarget{results}{%
+\section{Simulations}\label{simulations}}
+
+\begin{frame}[fragile]{Methods}
+\protect\hypertarget{methods}{}
+
+\begin{itemize}
+\tightlist
+\item
+  One- and two-sample simulations, BVN and \emph{non-}Normal copula
+  (with Normal margins)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    parameters varying
+
+    \begin{enumerate}
+    [i.]
+    \tightlist
+    \item
+      sample size (100, 400, 1000)
+    \item
+      mean difference event-of-interest to competing-event (0, 0.5, 1)
+    \item
+      event probability (complement \emph{censoring fraction}) $\to$ prob event-of-interest occurs before \texttt{eof}
+        \begin{itemize}
+        \tightlist
+        \item[~~-]
+          surviving fractions (1, 0.8, 0.6)
+        \item[~~-]
+          competing event censoring \emph{not} included
+        \end{itemize}
+    \item
+      \alert{correlation} \(\rho \in (-0.5,-0.25, 0, 0.25, 0.5)\)
+    \item
+      \alert{treatment benefit} (mean difference between \emph{Treated
+      and Controls, 2 sample only})
+    \end{enumerate} % params varying
+  \end{itemize}
+
+\item
+  Parallel simulation computation
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{simsalapar} R package Hofert and Mächler (2016)
+  \end{itemize}
+
+\item
+  fixed-point accelerated EM iterations Bobb and Varadhan (2014)
+\item
+  estimation conducted in our R package \textbf{bnc}
+\end{itemize}
+
+\end{frame}

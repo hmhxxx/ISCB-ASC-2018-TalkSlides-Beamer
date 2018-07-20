@@ -1,0 +1,50 @@
+\begin{frame}{Conditional distribution}
+Let \(Z=(Z_1,Z_2) \sim \mbox{BVN}(0,\Sigma)\), with
+\(\sigma_{11}=\sigma_{22}=1, \, \sigma_{12}=\rho\).
+
+\begin{exampleblock}{Example 1: \(E(Z_1| Z_2 > \tau)\)}
+%\textbf{Ex. 1:} \(E(Z_1| Z_2 > \tau)\)\\
+Conditional distribution of \((Z_1| Z_2=b)\) is \(N(\rho b, 1-\rho^2)\)
+with density\\
+\begin{equation}
+  p_{1|2}(z|b)= \frac{1}{\sqrt{1-\rho^2}}\; \phi\left(\frac{z-\rho b}{\sqrt{1-\rho^2}}\right) .
+  \end{equation}
+So, with Heavyside function \(H\) indicating values greater than 0 \\
+\begin{equation}
+  \begin{split}
+  E(Z_1| Z_2 > \tau) &= E\; E^{Z_2} [Z_1 H(Z_2-\tau)] \\
+    &=  E\; H(Z_2-\tau) E^{Z_2} Z_1 \\
+    &=  E\; H(Z_2-\tau) (\rho Z_2) \\
+    &=  \rho E (Z_2| Z_2 > \tau) \\
+    &= \rho \frac{\phi(\tau)}{1-\Phi(\tau)}
+  \end{split}
+  \end{equation}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Univariate Stein}
+
+\begin{exampleblock}{Example 2:  \(E (Z_1| Z_1 > a, Z_2 = b)\)}
+%\textbf{Ex. 2:} \(E (Z_1| Z_1 > a, Z_2 = b)\)
+
+\begin{equation} \label{E10.01}
+  E_{10.01} = E[(Z_1-\rho b)| Z_1>a, Z_2 =b]  + \rho b
+  \end{equation}
+
+Now\\
+
+\begin{equation}
+  \begin{split}
+  E[(Z_1-\rho b)| Z_1>a, Z_2 =b] &= E^{Z_2=b} [(Z1-\rho b) \,H(Z_1-a)] \\
+    &= (1-\rho^2) E^{Z_2=b} [\delta(Z_1-a)] \\ \label{Stein 1-d}
+    &= (1-\rho^2)\;p_{1|2}(a|b)  
+  \end{split}
+  \end{equation}
+
+Here (\ref{Stein 1-d}) uses Stein's univariate identity, with the
+derivative of Heavyside, Dirac's delta. Dirac's delta, in convolution
+has the \emph{sifting
+property}\footnote{Bracewell 2001; see Mathematica}
+\end{exampleblock}
+
+\end{frame}
