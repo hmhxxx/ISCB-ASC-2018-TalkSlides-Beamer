@@ -78,7 +78,15 @@
 \begin{frame}
 
 \begin{center}
-  \includegraphics[width=1.00\textwidth]{Figure1/tbl1_n100_rho_mayplot.pdf}
+  \includegraphics[trim= 0cm 0cm 0cm 5.75cm, clip, width=1.00\textwidth]{Figure1/tbl1_n100_rho_mayplot.pdf}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Correlation estimate, n=500 (Density plot)}
+
+\begin{center}
+  \includegraphics[trim= 0cm 0cm 0cm 11.75cm, clip, scale=0.475]{Figure1/tbl1densityPlot_n500.pdf} % width=1.00\textwidth, clip,, [scale=0.67]
 \end{center}
 
 \end{frame}
@@ -120,7 +128,7 @@ means)}
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Treatment Benefit, n=1000 (estimates)}
 
 \begin{center}
   \includegraphics[width=1.00\textwidth]{Figure3/mayplot3-deltaTreat-n1000.png}
@@ -128,6 +136,30 @@ means)}
 
 \end{frame}
 
+\begin{frame}{Treatment Benefit, n=1000, sf=0.6 (density plots)}
+
+\begin{center}
+  \includegraphics[scale=0.45]{Figure3/tbl3DensityPlots_n1000_003.pdf} % sf=0.6
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}{Treatment effect vs Cox HR (estimate assumes $\rho=0$)}
+
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{Figure3/estimateDifferences2v12.pdf}
+\end{center}
+
+\end{frame}
+
+\begin{frame}{Treatment Benefit, n=1000, sf=0.6 (density plots)}
+
+\begin{center}
+  \includegraphics[scale=0.45]{Figure3/tbl3DensityPlots_rho_n1000_003.pdf} % sf=0.6
+\end{center}
+
+\end{frame}
 
 \begin{frame}{Table 3c (n=1000)}{Estimates: Treatment $\hat{\rho}$}
 \begin{table}[htbp]
@@ -160,5 +192,4 @@ means)}
 \end{table}
 
 \end{frame}
-
 
