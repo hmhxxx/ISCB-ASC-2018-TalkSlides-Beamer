@@ -213,30 +213,21 @@
 
 
 
-\section{Simulation Aim, Methods, Results}
+\section{Simulation Aim, Methods}
 
-\begin{frame}{Simulation Goals and Outcomes}
+\begin{frame}{Simulation Goals}
 \begin{itemize}
 \item
   {\color{DarkBlue}{Aim:}} parametric estimation of \alert{first-event data} from correlated
   BVN competing risks
 
   \begin{itemize}
-  \tightlist
   \item
     Sampling distribution (\alert{bias, variance}) of MPL estimation of
-    BVN parameters in one- and two- sample datasets  first-event times
+    BVN parameters in one- and two- sample datasets of first-event times
   \item
     Sampling distribution of mean difference estimated between Treated
     and Control subjects
-  \end{itemize}
-
-\item {\color{DarkBlue}{Simulation outcomes}}
-  \begin{itemize}
-  \tightlist
-  \item Bias and Variance in ML estimation of parameters (esp. \( B,  \rho \) ) in BVN\( (\mu,\Sigma) \)
-  \item Convergence status, number of iterations
-  \item Varying: sample size, tolerance (cvg)
   \end{itemize}
 \end{itemize}
 \end{frame}
@@ -251,7 +242,7 @@
 % \hypertarget{options}{%
 % \section{Options}\label{options}}
 
-\section{Consequences}
+\section{Follow-up}
 
 
 \begin{frame}[fragile]{Fixed correlation, a la GEE}
@@ -261,11 +252,13 @@
 \tightlist
 \item
   MPL solution with rho fixed
+  \begin{itemize}
+      \item \cite{AndersonOlkin1985} (R package **bnc**)
+  \end{itemize}
 \end{itemize}
 
-\begin{verbatim}
-- @AndersonOlkin1985 (R package **bnc**)
-\end{verbatim}
+
+
 
 \begin{block}{Fixed correlation, rationale}
 
@@ -298,6 +291,15 @@
 \end{block}
 
 \end{frame}
+
+\begin{frame}{survreg coef of treatment benefit assuming $\rho=0$, n=100}
+
+\begin{center}
+  \includegraphics[width=1.00\textwidth]{Figure3/mayplot-coefTreat-n100-v2.pdf} % sf=0.6 scale=0.45
+\end{center}
+
+\end{frame}
+
 
 % -------------------------------------------------------------------------
 \hypertarget{robustness-to-non-normality}{%
@@ -391,7 +393,7 @@ EM iterations
     {\color{DarkBlue}{Outlook}}
     \begin{itemize}
     \item
-      Need further comparison of estimates of $\beta$ fixing $\rho$ (e.g. assuming $\rho=0$) with MPL estimates of the BNC model.
+      Need further comparison of estimates of $B$ fixing $\rho$ (e.g. assuming $\rho=0$) with MPL estimates of the BNC model.
     \item
       Asymptotic properties of this GEE-like procedure warrant investigation.
     \end{itemize}
@@ -443,5 +445,35 @@ Cumulative Incidence Function.'' \emph{Biostatistics} 8 (2): 184.
 %\subsection<presentation>*{For Further Reading}
 
 %} % end no-logo
+\section{Extras}
+\begin{frame}{correlation: $\hat{\rho}$ (n=1000)}
 
+\begin{table}[htbp]
+  \centering\scriptsize
+  \begin{tabular}{*{2}{l}*{3}{r}}
+    \toprule
+    cs & \( \rho \) \textbar\ beta2 & \multicolumn{1}{c}{0} & \multicolumn{1}{c}{0.5} & \multicolumn{1}{c}{1} \\
+    \midrule
+    1 & -0.5 & -0.48 & -0.49 & -0.49 \\
+    & -0.25 & -0.22 & -0.23 & -0.21 \\
+    & 0 & 0.04 & 0.04 & 0.05 \\
+    & 0.25 & 0.32 & 0.32 & 0.34 \\
+    & 0.5 & 0.49 & 0.47 & 0.48 \\ \addlinespace[3pt]
+    0.8 & -0.5 & -0.48 & -0.48 & -0.47 \\
+    & -0.25 & -0.22 & -0.21 & -0.19 \\
+    & 0 & 0.08 & 0.09 & {\color{red}0.13} \\
+    & 0.25 & 0.32 & {0.37} & {\color{red}0.35} \\
+    & 0.5 & 0.48 & 0.48 & 0.48 \\ \addlinespace[3pt]
+    0.6 & -0.5 & -0.48 & -0.47 & -0.46 \\
+    & -0.25 & -0.24 & -0.20 & {\color{red}-0.09} \\
+    & 0 & {\color{red}0.10} & {\color{red}0.13} & {\color{red}0.22} \\
+    & 0.25 & {\color{red}0.35} & {\color{red}0.38} & {\color{red}0.39} \\
+    & 0.5 & 0.48 & 0.48 & 0.47 \\
+    \bottomrule
+  \end{tabular}
+  \caption*{medians of 100 replicates}
+  \label{tab:1ft}
+\end{table}
+
+\end{frame}
 \end{document}
