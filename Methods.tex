@@ -7,23 +7,24 @@
 \begin{itemize}
 \tightlist
 \item
-  One- and two-sample simulations, BVN and \emph{non-}Normal copula
-  (with Normal margins)
+  One- and two-sample simulations
 
   \begin{itemize}
   \tightlist
+  \item BVN and \emph{non-}Normal copula  (with Normal margins)
   \item
-    Parameters varying
+    {\color{DarkBlue}{Parameters varying}}
 
     \begin{enumerate}
     [i.]
     \tightlist
     \item
-      Sample size (100, {\color{red}{400}}, 1000)  {\color{red}{why not 500}}
+      Sample size (100, 500, 1000)  
     \item
       Mean difference event-of-interest to competing-event (0, 0.5, 1)
     \item
-      Event probability (complement \emph{censoring fraction}) $\to$ prob event-of-interest occurs before \texttt{eof}
+      Event probability (complement \emph{censoring fraction event 1}) 
+      \item[]$\Rightarrow$ prob event-of-interest occurs before {\color{DarkBlue}{end of study}} (\texttt{eof})
         \begin{itemize}
         \tightlist
         \item[~~-]
@@ -34,8 +35,8 @@
     \item
       \alert{Correlation} \(\rho \in (-0.5,-0.25, 0, 0.25, 0.5)\)
     \item
-      \alert{Treatment benefit} (mean difference between \emph{Treated
-      and Controls, 2 sample only})
+      \alert{Treatment benefit} (mean time difference between {\color{DarkBlue}{\emph{Treated
+      and Controls, 2 sample only}}})
     \end{enumerate} % params varying
   \end{itemize}
 
@@ -50,7 +51,7 @@
 \item
   Fixed-point accelerated EM iterations Bobb and Varadhan (2014)
 \item
-  estimation conducted in our R package \textbf{bnc}
+  Estimation conducted in our R package \textbf{bnc}
 \end{itemize}
 
 \end{frame}

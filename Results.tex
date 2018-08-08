@@ -12,7 +12,7 @@
 \protect\hypertarget{estimation-of-rho-one-sample}{}
 
 
-\begin{frame}{Table 1b (n=1000)}{squareEM iterations}
+\begin{frame}{squareEM iterations (n=1000)}
 
 \begin{table}[htbp]
   \centering\scriptsize
@@ -37,14 +37,14 @@
     & 0.5 & 184 & {\color{red}250} & {\color{red}250} \\
     \bottomrule
   \end{tabular}
-  \caption{max number iterations to converge, nsim=100}
+  \caption*{max number iterations to converge, nsim=100}
   \label{tab:ft1b}
 \end{table}
 \end{frame}
 
 
 
-\begin{frame}{Table 1a (n=1000)}{Estimation: $\hat{\rho}$}
+\begin{frame}{1-sample correlation: $\hat{\rho}$ (n=1000)}
 
 \begin{table}[htbp]
   \centering\scriptsize
@@ -69,33 +69,32 @@
     & 0.5 & 0.48 & 0.48 & 0.47 \\
     \bottomrule
   \end{tabular}
-  \caption{median of 100 replicates}
+  \caption*{medians of 100 replicates}
   \label{tab:1ft}
 \end{table}
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Correlation (n=100)}
 
 \begin{center}
-  \includegraphics[trim= 0cm 0cm 0cm 5.75cm, clip, width=1.00\textwidth]{Figure1/tbl1_n100_rho_mayplot.pdf}
+  \includegraphics[trim= 0cm 0cm 0cm 11.75cm, clip, scale=0.475]{Figure1/tbl1_n100_rho_mayplot.pdf}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Correlation estimate, n=500 (Density plot)}
+\begin{frame}{1-sample: Correlation estimate, n=500 (Density plot)}
 
 \begin{center}
-  \includegraphics[trim= 0cm 0cm 0cm 11.75cm, clip, scale=0.475]{Figure1/tbl1densityPlot_n500.pdf} % width=1.00\textwidth, clip,, [scale=0.67]
+  \includegraphics[trim= 0cm 0cm 0cm 11.75cm, clip, scale=0.47]{Figure1/tbl1densityPlot_n500.pdf} % width=1.00\textwidth, clip,, [scale=0.67]
 \end{center}
 
 \end{frame}
 
-\subsection{Estimation of treatment benefit: two samples (ratio of
-means)}
-\protect\hypertarget{estimation-of-treatment-benefit-two-samples-ratio-of-means}{}
+\subsection{2-sample: Estimation of treatment benefit}
+\protect\hypertarget{two-samples}{}
 
-\begin{frame}{Table 3b (n=1000)}{Estimates: Treatment $\hat{\Delta}=\hat{\beta}_{21}$}
+\begin{frame}{2-sample: Treatment Benefit $\hat{\Delta}=\hat{\beta}_{21}$ (n=1000)} % 3b: n=1000
 \begin{table}[htbp]
   \centering\scriptsize
   \begin{tabular}{*{2}{l}*{4}{r}}
@@ -120,6 +119,7 @@ means)}
     & 0.25 & 0.02 & 0.49 & 0.01 & 0.50 \\
     & 0.5 & 0.00 & 0.51 & -0.01 & 0.51 \\
     \bottomrule
+    \multicolumn{5}{l}{\footnotesize{medians of 100 replicates}} % \multicolumn{4}{l}{\textsuperscript{*}\footnotesize{The footnote}}
   \end{tabular}
 %  \caption{b21 TreatDiff estimate: Table 3b, n=1000}
   \label{tab:ft21}
@@ -128,32 +128,47 @@ means)}
 \end{frame}
 
 
-\begin{frame}{Treatment Benefit, n=1000 (estimates)}
+%\begin{frame}{2-sample: Treatment Benefit, n=1000 (estimates)} % sf x beta12
+
+%\begin{center}
+%  \includegraphics[width=1.00\textwidth]{Figure3/mayplot3-deltaTreat-n1000.png}
+%\end{center}
+
+%\end{frame}
+
+%{Treatment Benefit, n=1000, sf=0.6 (density plots)}
+%  \includegraphics[scale=0.45]{Figure3/tbl3DensityPlots_n1000_003.pdf} % sf=0.6
+
+\begin{frame}{2-sample: Treatment Benefit, n=100 (estimates)} % sf x beta12
 
 \begin{center}
-  \includegraphics[width=1.00\textwidth]{Figure3/mayplot3-deltaTreat-n1000.png}
+  \includegraphics[width=1.00\textwidth]{Figure3/mayplot3-deltaTreat-n100.png}
 \end{center}
 
 \end{frame}
 
-\begin{frame}{Treatment Benefit, n=1000, sf=0.6 (density plots)}
+%  \includegraphics[width=0.95\textwidth]{Figure3/estimateDifferences2v12.pdf}
+
+\begin{frame}{2-sample: survreg coef of treatment benefit ($\rho=0$), n=100}
 
 \begin{center}
-  \includegraphics[scale=0.45]{Figure3/tbl3DensityPlots_n1000_003.pdf} % sf=0.6
+  \includegraphics[width=1.00\textwidth]{Figure3/mayplot-coefTreat-n100-v2.pdf} % sf=0.6 scale=0.45
 \end{center}
 
 \end{frame}
 
+%\begin{frame}{2-sample: Treatment difference: BNC estimate  vs survreg coef ($\rho=0$)}
 
-\begin{frame}{Treatment effect vs Cox HR (estimate assumes $\rho=0$)}
+%\begin{center}
+%  \includegraphics[height=0.95\textheight,width=0.95\textwidth]{%
+%  Figure3/estimateDifferences2vs12v2.pdf%
+%  }
+%\end{center}
 
-\begin{center}
-  \includegraphics[width=0.95\textwidth]{Figure3/estimateDifferences2v12.pdf}
-\end{center}
+%\end{frame}
 
-\end{frame}
 
-\begin{frame}{Treatment Benefit, n=1000, sf=0.6 (density plots)}
+\begin{frame}{2-sample Treatment Benefit, n=1000, sf=0.6 (density plots)}
 
 \begin{center}
   \includegraphics[scale=0.45]{Figure3/tbl3DensityPlots_rho_n1000_003.pdf} % sf=0.6
@@ -161,7 +176,7 @@ means)}
 
 \end{frame}
 
-\begin{frame}{Table 3c (n=1000)}{Estimates: Treatment $\hat{\rho}$}
+\begin{frame}{3c: 2-sample  $\hat{\rho}$ (n=1000)  }
 \begin{table}[htbp]
   \centering\scriptsize
   \begin{tabular}{*{2}{l}*{4}{r}}

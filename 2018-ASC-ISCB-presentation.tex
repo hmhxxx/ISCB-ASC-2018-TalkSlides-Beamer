@@ -1,5 +1,7 @@
+\PassOptionsToPackage{svgnames}{xcolor}
 \documentclass[10pt]{beamer}
 \usepackage{booktabs}
+\usepackage{caption}
 \usepackage{lmodern}
 \usepackage{amsmath}
 \usepackage{amssymb,amsmath}
@@ -121,6 +123,48 @@
   % You might wish to add the option [pausesections]
 \end{frame}
 
+ \begin{frame}
+  \frametitle{Competitive risks}
+  \framesubtitle{Example}
+\small\begin{itemize}
+ \item Study time to  several events in competition (24 patients): 
+
+   \begin{itemize}
+  \item Myocardial infarction (MI) %  or  Cardiovascular death (CVD)
+ $\rule[0.3ex]{1cm}{.3pt}\times$ (10)
+\item Death from other causes
+  ${\color{gray}{\rule[0.3ex]{1cm}{.5pt}\times}} $ (8)
+\item Censoring
+ $\cdots \circ $ (6)
+  \end{itemize}
+ \begin{center}\includegraphics[height=3cm]{censure.jpg}\end{center}
+
+  \item {\color{DarkBlue}{Patient status:}}\\
+  
+  \begin{tabular}{p{4cm}ll}
+ Myocardial infarction 
+ &\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2->{{\color{orange}{Event of interest  }}}\\
+%Cardiovascular death
+%  &\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2->{{\color{orange}{Event of interest  }}}\\
+     Withdraw from study
+   &\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2->{{\color{orange}{Censoring }}}\\
+    Death from other causes
+&\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2>{{\color{orange}{Censoring} }}\visible<3->{{\color{red}{\textbf{Competing event}}}}  \\
+\end{tabular}
+
+\item[] \visible<2>{{\color{red}{Introduces dependence between censoring and event}}}
+\item[] \visible<3>{{\color{red}{Respects independent censoring assumption in SVA}}}
+  \end{itemize}
+
+  %   \begin{figure}
+  %\caption{}
+
+  \end{frame}
+
+
+
+  
+ 
 %{\nologo
 
 % Section and subsections will appear in the presentation overview
@@ -130,59 +174,43 @@
 \begin{frame}{Correlated competing risks model}
   \begin{itemize}
   \item
-    Bivariate Normal Censored Linear Model (bnc lm)
+    {\color{DarkBlue}{Bivariate Normal Censored Linear Model}} (bnc lm)
     \begin{itemize}
     \item
-      log-Time to \emph{first occurring} event
+      Log-Time to {\color{DarkBlue}{\emph{first occurring}}} event
     \item
       Two events: $Y \sim \mbox{BVN}(\mu,\Sigma) $
     \item
-      lm: $\mu = X B$
+      lm: $\mu = X \beta$
     \item
-      \emph{bnc} lm for observed data: $y=\min (Y_1, Y_2, C)$;  $D=1,2,0$
+      \emph{bnc} lm for observed data: \color{red}{$y=\min (Y_1, Y_2, C)$} and  \color{red}{$D=1,2,0$}
+    \item observations $(y,D)$ comprise \emph{first-event data} 
     \end{itemize}
   \item
-    Estimation
+    {\color{DarkBlue}{Estimation}}
     \begin{itemize}
     \item ML solution 
     \item
       ML $\leftarrow$  MPL
     \item
-      EM algorithm using imputed times to non-occurring event
+      EM algorithm uses imputed times to non-occurring event
     \end{itemize}
   \item 
-    Imputation
+   {\color{DarkBlue}{Imputation}}
     \begin{itemize}
     \item Conditional moments
-      \( E (Y_1| Y_1 > y, Y_2=y, \, D=2) \)
+      \( \mathbb{E} (Y_1| Y_1 > y, Y_2=y, \, D=2) \)
     \item
-      \( E (Y_1| Y_1 > y, Y_2 > y, \, D=0) \)
+      \( \mathbb{E} (Y_1| Y_1 > y, Y_2 > y, \, D=0) \)
     \item 
-    \( E (Y_1^2| Y_1> y, Y_2=y,\, D=2) \) 
+    \( \mathbb{E} (Y_1^2| Y_1> y, Y_2=y,\, D=2) \) 
     \item
     \ldots \emph{etc}
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-\begin{frame}{BVN moment calculations for EM}
-Simple example (for clarity)
 
-\begin{itemize}
-\item
-  \emph{Known} means of (log-)Normal latent vars, \emph{no censoring}
-\item
-  \(y=\min(Y_1,Y_2)\) with \(Y \sim \text{BVN}(0, \Sigma)\), \(\Sigma\)
-  unknown
-\item
-  \(\Delta\) identifies which risk is observed (1 or 2)
-\item
-  Two risk times are never \emph{both} observed
-\item
-  {\color{orange}{Goal}}: the ML estimator of \(\Sigma\) from a random sample of
-  \(y, \Delta\)
-\end{itemize}
-\end{frame}
 
 
 \section{Simulation Aim, Methods, Results}
@@ -190,7 +218,7 @@ Simple example (for clarity)
 \begin{frame}{Simulation Goals and Outcomes}
 \begin{itemize}
 \item
-  \alert{Aim:} parametric estimation of \alert{first-event data} from correlated
+  {\color{DarkBlue}{Aim:}} parametric estimation of \alert{first-event data} from correlated
   BVN competing risks
 
   \begin{itemize}
@@ -203,10 +231,10 @@ Simple example (for clarity)
     and Control subjects
   \end{itemize}
 
-\item Simulation outcomes
+\item {\color{DarkBlue}{Simulation outcomes}}
   \begin{itemize}
   \tightlist
-  \item Bias and Variance in ML estimation of parameters (esp. \( \rho \) ) in BVN\( (\mu,\Sigma) \)
+  \item Bias and Variance in ML estimation of parameters (esp. \( B,  \rho \) ) in BVN\( (\mu,\Sigma) \)
   \item Convergence status, number of iterations
   \item Varying: sample size, tolerance (cvg)
   \end{itemize}
@@ -244,7 +272,7 @@ Simple example (for clarity)
 \begin{itemize}
 \tightlist
 \item
-  Estimating \(\rho\) is unstable \(\to\) fix its value a priori (to 0).
+  Estimating \(\rho\) is unstable \(\ \Rightarrow\) fix its value a priori (to 0).
 \item
   \(\rho=0\) is convenient
 
@@ -253,7 +281,7 @@ Simple example (for clarity)
   \item
     Competing event \(\to\) (further) independent censoring
   \item
-    Fit regreression coefficients of event 1 in
+    Fit regression coefficients of event 1 in
     \texttt{survival::survreg}
   \item
     Generalized Estimating Equations (GEEs)
@@ -325,7 +353,7 @@ EM iterations
   \item<6-> R-package \textbf{bnc}
 \end{itemize}
 
-\alert{\emph{What could possibly go wrong?}}
+\only<1-4>{\alert{\emph{What could possibly go wrong?}}}
 \begin{itemize}
 \item<1> Singular Hessian, failure to remain in $-1 < \rho < 1$ 
 \item<2>
@@ -346,11 +374,12 @@ EM iterations
     (package \textbf{bnc}).
   \item
     Despite the \alert{ill-posed} model, estimation is feasible.\\
-    Estimates: \\
+    {\color{DarkBlue}{Estimates:}} \\
+   
     \begin{tabular}{ c l l }
     \hline
     $\rho$: &  \alert{correlation estimates} & highly variable ($n=1000)$ \\
-    $B$: & \alert{regression coefficients}  &  precise (even for $n=100)$ \\ \hline  
+    $\beta$: & \alert{regression coefficients}  &  precise (even for $n=100)$ \\ \hline  
     \end{tabular}
     
   \item Regression coefficients provide estimates of \alert{treatment benefit} 
@@ -359,10 +388,10 @@ EM iterations
   
   \begin{itemize}
   \item
-    Outlook
+    {\color{DarkBlue}{Outlook}}
     \begin{itemize}
     \item
-      Need further comparison of estimates of $B$ fixing $\rho$ (e.g. assuming $\rho=0$) with MPL estimates of the BNC model.
+      Need further comparison of estimates of $\beta$ fixing $\rho$ (e.g. assuming $\rho=0$) with MPL estimates of the BNC model.
     \item
       Asymptotic properties of this GEE-like procedure warrant investigation.
     \end{itemize}
