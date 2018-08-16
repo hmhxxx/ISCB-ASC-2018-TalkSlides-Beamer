@@ -118,7 +118,7 @@
   \titlepage
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Outline}
+\begin{frame}{Outline}
   \tableofcontents
   % You might wish to add the option [pausesections]
 \end{frame}
@@ -149,17 +149,14 @@
      Withdraw from study
    &\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2->{{\color{orange}{Censoring }}}\\
     Death from other causes
-&\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\visible<2>{{\color{orange}{Censoring} }}\visible<3->{{\color{red}{\textbf{Competing event}}}}  \\
+&\visible<2->{{\color{DarkBlue}{$\Rightarrow$}}}&\only<2>{{\color{orange}{Censoring} }}\only<3->{{\color{red}{\textbf{Competing event}}}}  \\
 \end{tabular}
 
 \item[] \visible<2>{{\color{red}{Introduces dependence between censoring and event}}}
 \item[] \visible<3>{{\color{red}{Respects independent censoring assumption in SVA}}}
   \end{itemize}
 
-  %   \begin{figure}
-  %\caption{}
-
-  \end{frame}
+\end{frame}
 
 
 
@@ -181,10 +178,10 @@
     \item
       Two events: $Y \sim \mbox{BVN}(\mu,\Sigma) $
     \item
-      lm: $\mu = X \beta$
+      lm: $\mu = X B$ with $B=\left[ \beta_{ik} \right]$
     \item
       \emph{bnc} lm for observed data: \color{red}{$y=\min (Y_1, Y_2, C)$} and  \color{red}{$D=1,2,0$}
-    \item observations $(y,D)$ comprise \emph{first-event data} 
+    \item Observations $(y,D)$ comprise \emph{first-event data} 
     \end{itemize}
   \item
     {\color{DarkBlue}{Estimation}}
@@ -253,7 +250,7 @@
 \item
   MPL solution with rho fixed
   \begin{itemize}
-      \item \cite{AndersonOlkin1985} (R package **bnc**)
+      \item \textit{Anderson and Olkin (1985)} (R package **bnc**)
   \end{itemize}
 \end{itemize}
 
@@ -324,12 +321,20 @@
   \emph{Joint} distribution is \alert{non-} BVN
 \end{itemize}
 
+Simulate two-sample \alert{estimate of treatment benefit} with copula generated data. Shown below:
+\begin{itemize}
+  \tightlist
+  \item n=100
+  \item 100 simulations per cell ($\beta_{12}$ and sf (1.0, 0.8) versus $\theta$)
+  \item $\beta_{12} \in 0$ (black), $0.5$ (purple), $1$ (orange)
+  \item $\theta \in (-3.3057723, -1.4789574,    0, 1.4789574, 3.3057723)$
+\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[fragile]{Treatment benefit (n=100)}
 
 \begin{center}
-  \includegraphics[width=1.00\textwidth]{Figure2/boxplotArray2.pdf}
+  \includegraphics[width=0.95\textwidth]{Figure4/mayplot_deltaTreat.pdf}
 \end{center}
 
 \end{frame}
@@ -345,7 +350,7 @@
 \begin{itemize}
 \tightlist
 \item<1->
-  Optimize to maximize Likelihood (\emph{routine})
+  Optimize (e.g. \textemph{optim}) to maximize Likelihood function
   \item<2-> EM algorithm (\emph{safety first}) 
   \item<3-> Mildly
 Penalize Likelihood, adjust EM alg for MPL
@@ -357,11 +362,11 @@ EM iterations
 
 \only<1-4>{\alert{\emph{What could possibly go wrong?}}}
 \begin{itemize}
-\item<1> Singular Hessian, failure to remain in $-1 < \rho < 1$ 
+\item<1> Singular Hessian, failure to remain in $-1 < \rho < 1$, method fails 
 \item<2>
   \begin{enumerate}
   \item[i.] Be prepared to wait (forever) for convergence;
-  \item[ii.] Convergence failure possible when $\hat{\rho} = +1$ or $-1$
+  \item[ii.] Convergence failure possible when $\hat{\rho}_{\mbox{ML}} = +1$ or $-1$
   \end{enumerate}
 \item<3> Still very slow, but sure, convergence
 \item<4> Very fast, but can fail to converge
@@ -416,8 +421,11 @@ Aitkin, M. 1981. ``A Note on the Regression Analysis of Censored Data.''
 \emph{Technometrics} 23 (2). American Statistical Association; American
 Society for Quality: 161--63. \url{http://www.jstor.org/stable/1268032}.
 
+Anderson, T.W. and Olkin, I. 1985. ``Maximum-likelihood estimation of the parameters of a multivariate normal distribution.''
+\emph{Linear Algebra and its Applications} 70.  147--71. \url{https://doi.org/10.1016/0024-3795(85)90049-7}.
+
 %\leavevmode\hypertarget{ref-Rpackage-turboEM}{}%
-Bobb, Jennifer F., and Ravi Varadhan. 2014. \emph{TurboEM: A Suite of
+Bobb, J. F. and Varadhan, R. 2014. \emph{TurboEM: A Suite of
 Convergence Acceleration Schemes for EM, MM and Other Fixed-Point
 Algorithms}. \url{https://CRAN.R-project.org/package=turboEM}.
 
@@ -427,13 +435,13 @@ Analysis.'' \emph{Scandinavian Journal of Statistics}
 18 (3): 223--33. \url{https://doi.org/10.2307/4616205}.
 
 %\leavevmode\hypertarget{ref-Rpackage-simsalapar}{}%
-Hofert, Marius, and Martin Mächler. 2016. ``Parallel and Other
+Hofert, M. and  Mächler, M. 2016. ``Parallel and Other
 Simulations in R Made Easy: An End-to-End Study.'' \emph{Journal of
 Statistical Software} 69 (4): 1--44.
 \url{https://doi.org/10.18637/jss.v069.i04}.
 
 %\leavevmode\hypertarget{ref-JeongFine2007}{}%
-Jeong, Jong-Hyeon, and Jason P. Fine. 2007. ``Parametric Regression on
+Jeong, J.-H., and Fine, J.P. 2007. ``Parametric Regression on
 Cumulative Incidence Function.'' \emph{Biostatistics} 8 (2): 184.
 \url{https://doi.org/10.1093/biostatistics/kxj040}.
 
