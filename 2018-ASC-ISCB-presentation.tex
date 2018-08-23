@@ -124,7 +124,7 @@
 \end{frame}
 
  \begin{frame}
-  \frametitle{Competitive risks}
+  \frametitle{Competing risks}
   \framesubtitle{Example}
 \small\begin{itemize}
  \item Study time to  several events in competition (24 patients): 
@@ -178,7 +178,7 @@
     \item
       Two events: $Y \sim \mbox{BVN}(\mu,\Sigma) $
     \item
-      lm: $\mu = X B$ with $B=\left[ \beta_{ik} \right]$
+      lm: $\mu = X B$ with $B=\left[ \beta_{kj} \right]$ for $k=1,2$
     \item
       \emph{bnc} lm for observed data: \color{red}{$y=\min (Y_1, Y_2, C)$} and  \color{red}{$D=1,2,0$}
     \item Observations $(y,D)$ comprise \emph{first-event data} 
@@ -196,11 +196,11 @@
    {\color{DarkBlue}{Imputation}}
     \begin{itemize}
     \item Conditional moments
-      \( \mathbb{E} (Y_1| Y_1 > y, Y_2=y, \, D=2) \)
+      \( \mathbb{E} (Y_1| Y_1 > y, Y_2=y), \quad \mbox{when } D=2\)
     \item
-      \( \mathbb{E} (Y_1| Y_1 > y, Y_2 > y, \, D=0) \)
+      \( \mathbb{E} (Y_1| Y_1 > y, Y_2 > y), \quad \mbox{when } D=0 \)
     \item 
-    \( \mathbb{E} (Y_1^2| Y_1> y, Y_2=y,\, D=2) \) 
+    \( \mathbb{E} (Y_1^2| Y_1> y, Y_2=y), \quad \mbox{when } D=2 \) 
     \item
     \ldots \emph{etc}
     \end{itemize}
@@ -242,20 +242,8 @@
 \section{Follow-up}
 
 
-\begin{frame}[fragile]{Fixed correlation, a la GEE}
+\begin{frame}[fragile]{GEE fixing correlation}
 \protect\hypertarget{fixed-correlation-a-la-gee}{}
-
-\begin{itemize}
-\tightlist
-\item
-  MPL solution with rho fixed
-  \begin{itemize}
-      \item \textit{Anderson and Olkin (1985)} (R package **bnc**)
-  \end{itemize}
-\end{itemize}
-
-
-
 
 \begin{block}{Fixed correlation, rationale}
 
@@ -263,29 +251,40 @@
 \tightlist
 \item
   Estimating \(\rho\) is unstable \(\ \Rightarrow\) fix its value a priori (to 0).
+    \item
+    Generalized Estimating Equations (GEEs)
+
+    \begin{itemize}
+      \tightlist
+      \item
+      Consistency/ unbiasedness to estimating regression coefficients?
+      \item
+      Likelihood scores with assumed covariance structure
+    \end{itemize}
 \item
   \(\rho=0\) is convenient
+
 
   \begin{itemize}
   \tightlist
   \item
-    Competing event \(\to\) (further) independent censoring
+    Competing event \(\to\) (additional) independent censoring
   \item
     Fit regression coefficients of event 1 in
     \texttt{survival::survreg}
-  \item
-    Generalized Estimating Equations (GEEs)
-
-    \begin{itemize}
-    \tightlist
-    \item
-      Consistency/ unbiasedness to estimating regression coefficients?
-    \item
-      Likelihood scores with assumed covariance structure
-    \end{itemize}
-  \end{itemize}
+\end{itemize}
 \end{itemize}
 \end{block}
+
+\begin{itemize}
+\tightlist
+\item
+  Implementing MPL solution with rho fixed
+  \begin{itemize}
+      \item \texttt{survival::survreg} in particular case $\rho=0$
+      \item \textit{Anderson and Olkin (1985)} (R package \texttt{bnc})
+  \end{itemize}
+\end{itemize}
 
 \end{frame}
 
@@ -350,7 +349,7 @@ Simulate two-sample \alert{estimate of treatment benefit} with copula generated 
 \begin{itemize}
 \tightlist
 \item<1->
-  Optimize (e.g. \textemph{optim}) to maximize Likelihood function
+  Optimize (e.g. \texttt{optim}) to maximize Likelihood function
   \item<2-> EM algorithm (\emph{safety first}) 
   \item<3-> Mildly
 Penalize Likelihood, adjust EM alg for MPL
@@ -365,8 +364,8 @@ EM iterations
 \item<1> Singular Hessian, failure to remain in $-1 < \rho < 1$, method fails 
 \item<2>
   \begin{enumerate}
-  \item[i.] Be prepared to wait (forever) for convergence;
-  \item[ii.] Convergence failure possible when $\hat{\rho}_{\mbox{ML}} = +1$ or $-1$
+  \item[i.] Convergence can be to a boundary $\hat{\rho}_{\mbox{ML}} = +1$ or $-1$;
+  \item[ii.] Be prepared to wait (forever) for convergence
   \end{enumerate}
 \item<3> Still very slow, but sure, convergence
 \item<4> Very fast, but can fail to converge
